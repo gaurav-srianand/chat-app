@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import Add from './img/add.png';
+import Add from '../img/add.png';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, storage, db } from './firebase';
+import { auth, storage, db } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, doc, setDoc } from "firebase/firestore"; 
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [err, setErr] = useState(false);
+  const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -42,6 +44,8 @@ const Register = () => {
             email,
             photoURL: downloadURL
           });
+          await setDoc(doc(db, "userChats", res.user.uid), { });
+          navigate("/");
         }
       );
     } catch (err) {
