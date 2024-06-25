@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Add from '../img/add.png';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, storage, db } from '../firebase';
+import { auth, storage, db } from '../firebase'; 
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, doc, setDoc } from "firebase/firestore"; 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -69,7 +69,7 @@ const Register = () => {
           </label>
           <button type='submit'>Sign Up</button>
         </form>
-        <p>You do have an account? Login</p>
+        <p>You do have an account? <Link to='/login'>Login</Link></p>
         {err && <span>Something went wrong!!</span>}
       </div>
     </div>
